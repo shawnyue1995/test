@@ -30,12 +30,11 @@ public class ActivityServiceImpl implements ActivityService{
 
     @Override
     public Activity findById(Long id) {
-        return (Activity) activityDao.findById(id);
+        return activityDao.findById(id);
     }
 
     @Override
     public int update(Activity entity) {
-        int rows=activityDao.update(entity);
-        return rows;
+        return activityDao.update(entity);
     }
 }

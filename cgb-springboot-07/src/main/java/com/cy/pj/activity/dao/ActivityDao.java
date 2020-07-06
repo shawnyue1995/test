@@ -11,14 +11,14 @@ import java.util.List;
 public interface ActivityDao {
     int insertObject(Activity entity);
 
-    @Select("SELECT id,title,category,startTime,endTime,remark,state,createdTime,createdUser FROM tb_activity")
+    @Select("SELECT * FROM tb_activity order by createdTime desc")
     List<Activity> findAll();
 
     @Delete("Delete from tb_activity where id=#{id}")
     int deleteById(Long id);
 
     @Select("SELECT * FROM tb_activity where id=#{id}")
-    List<Activity> findById(Long id);
+    Activity findById(Long id);
 
     int update(Activity entity);
 }
