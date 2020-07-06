@@ -1,0 +1,49 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="empUpdate" method="post">
+    <table border="1" th:each="emp:${list}">
+        <tr>
+            <td>
+                <label>
+                    <input type="hidden" name="id" th:value="${emp.id}">
+                </label>
+            </td>
+        </tr>    <tr>
+            <td>name</td>
+            <td>
+                <label>
+                    <input type="text" name="name" th:value="${emp.name}">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>job</td>
+            <td>
+                <label>
+                    <input type="text" name="job" th:value="${emp.job}">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>salary</td>
+            <td>
+                <label>
+                    <input type="text" name="salary" th:value="${emp.salary}">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="提	交" />
+            </td>
+        </tr>
+    </table>
+
+</form>
+</body>
+</html>

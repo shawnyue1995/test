@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.01/CGB-DB-SYS-V3.01.iml" filepath="$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.01/CGB-DB-SYS-V3.01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.02/CGB-DB-SYS-V3.02.iml" filepath="$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.02/CGB-DB-SYS-V3.02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CGB-JAVASE-01/CGB-JAVASE-01.iml" filepath="$PROJECT_DIR$/CGB-JAVASE-01/CGB-JAVASE-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgb-springboot-01/cgb-springboot-01.iml" filepath="$PROJECT_DIR$/cgb-springboot-01/cgb-springboot-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgb-springboot-02/cgb-springboot-02.iml" filepath="$PROJECT_DIR$/cgb-springboot-02/cgb-springboot-02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgb-springboot-03/cgb-springboot-03.iml" filepath="$PROJECT_DIR$/cgb-springboot-03/cgb-springboot-03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgb-springboot-04/cgb-springboot-04.iml" filepath="$PROJECT_DIR$/cgb-springboot-04/cgb-springboot-04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgb-springboot-05/cgb-springboot-05.iml" filepath="$PROJECT_DIR$/cgb-springboot-05/cgb-springboot-05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgb-springboot-06/cgb-springboot-06.iml" filepath="$PROJECT_DIR$/cgb-springboot-06/cgb-springboot-06.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgb-springboot-07/cgb-springboot-07.iml" filepath="$PROJECT_DIR$/cgb-springboot-07/cgb-springboot-07.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ideaworkspace_CGB2004_3JieDuan.iml" filepath="$PROJECT_DIR$/ideaworkspace_CGB2004_3JieDuan.iml" />
+    </modules>
+  </component>
+</project>

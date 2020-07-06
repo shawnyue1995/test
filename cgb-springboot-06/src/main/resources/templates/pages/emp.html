@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/emp/insert" method="post">
+    <ul>
+        <li>name:
+        <li><input type="text" name="name">
+        <li>job:
+        <li><input type="text" name="job">
+        <li>salary
+        <li><input type="text" name="salary">
+        <li><input type="submit" value="save"></li>
+    </ul>
+</form>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>name</th>
+            <th>job</th>
+            <th>salary</th>
+        </thead>
+        <tbody>
+            <tr th:each="e:${list}">
+                <td th:text="${e.id}"></td>
+                <td th:text="${e.name}"></td>
+                <td th:text="${e.job}"></td>
+                <td th:text="${e.salary}">"</td>
+                <td><a th:href="@{/emp/deleteById(id=${e.id})}">delete</a></td>
+                <td><a th:href="@{/emp/findById(id=${e.id})}">update</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

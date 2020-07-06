@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <form action="/goods/doSaveGoods" method="post">
+       <ul>
+           <li>name:
+           <li><input type="text" name="name">
+           <li>remark:
+           <li><textarea rows="5" cols=""50 name="remark"></textarea>
+           <li><input type="submit" value="save"></li>
+       </ul>
+   </form>
+   <fieldset>
+       <legend>商品列表</legend>
+       <table width="50%">
+    <table>
+        <thead>
+            <th>id</th>
+            <th>name</th>
+            <th>remark</th>
+            <th>createdTime</th>
+        </thead>
+        <tbody>
+            <tr th:each="g:${list}" >
+                <td th:text="${g.id}"></td>
+                <td th:text="${g.name}"></td>
+                <td th:text="${g.remark}"></td>
+                <td th:text="${#dates.format(g.createdTime,'yyyy/MM/dd HH:mm')}"></td>
+                <td><a th:href="@{/goods/doDeleteById(id=${g.id})}">delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

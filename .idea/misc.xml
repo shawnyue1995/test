@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/cgb-springboot-02/pom.xml" />
+        <option value="$PROJECT_DIR$/cgb-springboot-01/pom.xml" />
+        <option value="$PROJECT_DIR$/cgb-springboot-03/pom.xml" />
+        <option value="$PROJECT_DIR$/../kejian/三阶段/Day03am-01-code-(CGB-JAVASE-01&amp;CGB-SPRINGBOOT-03)/CGB-JAVASE-01/pom.xml" />
+        <option value="$PROJECT_DIR$/cgb-springboot-04/pom.xml" />
+        <option value="$PROJECT_DIR$/cgb-springboot-05/pom.xml" />
+        <option value="$PROJECT_DIR$/cgb-springboot-06/pom.xml" />
+        <option value="$PROJECT_DIR$/cgb-springboot-07/pom.xml" />
+        <option value="$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.01/pom.xml" />
+        <option value="$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.02/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
