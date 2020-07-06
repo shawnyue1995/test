@@ -14,87 +14,43 @@
 <div>
     <h2>活动修改页面</h2>
 </div>
+<div class="container">
 <form action="update" method="post">
-    <table border="1" th:each="a:${list}">
-        <tr>
-            <td>
-                <label>
-                    <input type="hidden" name="id" th:value="${a.id}">
-                </label>
-            </td>
-        </tr>
-        <tr>
-        <td>title</td>
-        <td>
-            <label>
-                <input type="text" name="title" th:value="${a.title}">
-            </label>
-        </td>
-    </tr>
-        <tr>
-            <td>category</td>
-            <td>
-                <label>
-                    <input type="text" name="category" th:value="${a.category}">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>startTime</td>
-            <td>
-                <label>
-                    <input type="text" name="startTime" th:value="${a.startTime}">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>endTime</td>
-            <td>
-                <label>
-                    <input type="text" name="endTime" th:value="${a.endTime}">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>remark</td>
-            <td>
-                <label>
-                    <input type="text" name="remark" th:value="${a.remark}">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>state</td>
-            <td>
-                <label>
-                    <input type="text" name="state" th:value="${a.state}">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>createdTime</td>
-            <td>
-                <label>
-                    <input type="text" name="createdTime" th:value="${a.createdTime}">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td>createdUser</td>
-            <td>
-                <label>
-                    <input type="text" name="createdUser" th:value="${a.createdUser}">
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="提	交" />
-            </td>
-        </tr>
-    </table>
-
+    <!-- 更新操作是基于id进行记录更新 -->
+    <input type="hidden" name="id" th:value="${activity.id}">
+    <div class="form-group">
+        <label for="titleId">标题</label>
+        <input type="text" class="form-control"
+               id="titleId" name="title" th:value="${activity.title}"
+               placeholder="please input  title">
+    </div>
+    <div class="form-group">
+        <label for="categoryId">类型</label>
+        <input type="text" class="form-control"
+               id="categoryId" name="category" th:value="${activity.category}"
+               placeholder="please input  category">
+    </div>
+    <div class="form-group">
+        <label for="startTimeId">开始时间</label>
+        <input type="text" class="form-control"
+               id="startTimeId" name="startTime" th:value="${#dates.format(activity.startTime, 'yyyy/MM/dd HH:mm')}"
+               placeholder="please input  startTime">
+    </div>
+    <div class="form-group">
+        <label for="endTimeId">结束时间</label>
+        <input type="text" class="form-control"
+               id="endTimeId" name="endTime" th:value="${#dates.format(activity.endTime, 'yyyy/MM/dd HH:mm')}"
+               placeholder="please input  end time">
+    </div>
+    <div class="form-group">
+        <label for="remarkId">备注</label>
+        <textarea class="form-control" id="remarkId"
+                  rows="3" cols="100" name="remark" th:text="${activity.remark}"
+                  placeholder="please input  end time"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
 </form>
+    </div>
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="../../static/jquery/jquery/jquery.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->

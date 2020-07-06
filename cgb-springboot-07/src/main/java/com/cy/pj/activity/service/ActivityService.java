@@ -12,7 +12,7 @@ public interface ActivityService {
 
     int saveObject(Activity entity);
 
-    List<Activity> findById(Long id);
+    Activity findById(Long id);
 
     int update(Activity entity);
 }

@@ -29,9 +29,8 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
-    public List<Activity> findById(Long id) {
-        List<Activity> list=activityDao.findById(id);
-        return list;
+    public Activity findById(Long id) {
+        return (Activity) activityDao.findById(id);
     }
 
     @Override
