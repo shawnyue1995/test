@@ -49,9 +49,8 @@
 				  <td th:text="${#dates.format(a.createdTime,'yyyy/MM/dd HH:mm')}">createdTime</td>
 				  <td th:text="${a.createdUser}">createdUser</td>
 				  <td th:text="${a.state==1?'有效':'失效'}">有效</td>
-				  <td><button type="button" class="btn btn-danger btn-sm" th:onclick="deleteById([[${a.id}]])">删除</button></td>
-				  <button type="button" class="btn btn-warning btn-sm"
-						  th:onclick="findById([[${a.id}]])">修改</button>
+				  <td><a th:href="@{/activity/deleteById(id=${a.id})}">delete</a></td>
+				  <td><a th:href="@{/activity/findById(id=${a.id})}">update</a></td>
 			  </tr>
 			</tbody>
         </table>

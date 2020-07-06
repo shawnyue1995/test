@@ -19,7 +19,7 @@ public class ActivityController {
     public String findById(Long id,Model model){
          Activity activity= activityService.findById(id);
         model.addAttribute("activity",activity);
-        return "activity-update.html";
+        return "activity-update";
     }
 
     @RequestMapping("update")
