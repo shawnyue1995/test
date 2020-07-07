@@ -6,21 +6,42 @@
 </head>
 <body>
 <div>
-    <button onclick="doAjaxGet()">doAjaxGet</button>
+    <button onclick="doAjaxGetRequest()">doAjaxGetRequest</button>
+</div>
+<div id="result">
+
 </div>
 <script type="text/javascript">
-    function doAjaxGet() {
-        /*1.创建异步请求对象*/
+    function doAjaxGetRequest() {
+        //定义请求url
+        var url = "/ajax/doAjaxGetRequest1";
+        //定义请求参数
+        var params = "key=A";
+        //发送ajax请求
+        doAjaxGet(url, params, function (result) {
+            var div = document.getElementById("result");
+            div.innerHTML = result;
+        });
+    }
+
+    //如果如下函数封装ajax的get请求
+    //思考：对于一个请求而言，往往不同的是什么？
+    //1)url可能不同
+    //2)参数可能不同
+    //3)处理结果的方式不同
+    //思考:一般我们在程序中对共性提取，进行封装，变化数据通过参数进行传递。
+    function doAjaxGet(url, params, callback) {
+        //1.创建异步请求对象XHR
         var xhr = new XMLHttpRequest();
-        /*2.设置状态监听*/
+        //2.设置状态监听
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                console.log(xhr.responseText);
+                callback(xhr.responseText);
             }
         }
-        /*3.建立连接*/
-        xhr.open("GET", "/ajax/doAjaxGetRequest", true);
-        /*4.发送请求*/
+        //3.建立连接
+        xhr.open("GET", url + "?" + params, true);
+        //4.发送请求
         xhr.send(null);
     }
 </script>
