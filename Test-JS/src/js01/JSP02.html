@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,4 +39,46 @@ document.getElementById('div1').style.background='red';">
 <div id="div1" onmouseout="toRed()" onmouseover="toGreen()">
 </div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background: red
+        }
+    </style>
+    <script>
+        function toGreen() {
+            var oDiv = document.getElementById('div1');
+            oDiv.style.width = '300px';
+            oDiv.style.height = '300px';
+            oDiv.style.background = 'green';
+        }
+
+        function toRed() {
+            var oDiv = document.getElementById('div1');
+            oDiv.style.width = '200px';
+            oDiv.style.height = '200px';
+            oDiv.style.background = 'red';
+        }
+    </script>
+</head>
+<body>
+<!--<div id="div1" onmouseover=
+"document.getElementById('div1').style.width='300px';
+document.getElementById('div1').style.height='300px';
+document.getElementById('div1').style.background='green';" onmouseout=
+"document.getElementById('div1').style.width='200px';
+document.getElementById('div1').style.height='200px';
+document.getElementById('div1').style.background='red';">
+</div>-->
+<div id="div1" onmouseout="toRed()" onmouseover="toGreen()">
+</div>
+</body>
+>>>>>>> github/master
 </html>

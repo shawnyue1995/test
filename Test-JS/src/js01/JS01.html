@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,4 +29,36 @@ onmouseover:当鼠标移入时弹出
     为了您的信息安全....
 </div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个JS效果</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 100px;
+            background: #ccc;
+            border: 1px solid #999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!--需求:当鼠标移入到input上的时候,让div1显示
+         鼠标移出input的时候,让div隐藏
+onmouseover:当鼠标移入时弹出
+    onmouseout:当鼠标移出时弹出
+    div1.style.display='block':div1的style的display
+    document.getElementById('div1')通过id获取元素,可以解决浏览器兼容性问题
+-->
+<input onmouseout="document.getElementById('div1').style.display=none"
+       onmouseover="document.getElementById('div1').style.display='block';"
+       type="checkbox">
+<div id="div1">
+    为了您的信息安全....
+</div>
+</body>
+>>>>>>> github/master
 </html>

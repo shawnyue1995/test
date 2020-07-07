@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 /* CSS Document */
 
@@ -9,4 +10,17 @@ input {
     width: 200px;
     height: 100px;
     background: yellow;
+=======
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+    background: black
+}
+
+input {
+    width: 200px;
+    height: 100px;
+    background: yellow;
+>>>>>>> github/master
 }
