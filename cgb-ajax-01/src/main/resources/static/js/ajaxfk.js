@@ -5,9 +5,9 @@
 //3)处理结果的方式不同
 //思考:一般我们在程序中对共性提取，进行封装，变化数据通过参数进行传递。
 (function () {
-    var ajax = function () {
+    var ajax = function () {/*定义函数*/
     }
-    ajax.prototype = {
+    ajax.prototype = {/*每个函数内部都有一个prototype属性,基于这个属性可以向指定函数添加函数*/
 
         doAjaxGet: function (url, params, callback) {
             //1.创建异步请求对象XHR
@@ -40,7 +40,7 @@
         }
     }
     window.Ajax = new ajax();
-})()
+})()/*()表示立刻执行匿名函数*/
 
 
 
