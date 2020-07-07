@@ -7,6 +7,7 @@
 <body>
 <div>
     <button onclick="doAjaxGetRequest()">doAjaxGetRequest</button>
+    <button onclick="doAjaxPostRequest()">doAjaxPostRequest</button>
 </div>
 <div id="result">
 
@@ -14,13 +15,25 @@
 <script type="text/javascript">
     function doAjaxGetRequest() {
         //定义请求url
-        var url = "/ajax/doAjaxGetRequest1";
+        var url = "/ajax/doAjaxGetRequest";
         //定义请求参数
         var params = "key=A";
         //发送ajax请求
         doAjaxGet(url, params, function (result) {
             var div = document.getElementById("result");
+            //innerHTML表示将result内容以html方式显示在obj对象内部
             div.innerHTML = result;
+        });
+    }
+
+    function doAjaxPostRequest() {
+        //定义请求url
+        var url = "/ajax/doAjaxPostRequest";
+        //定义请求参数
+        var params = "key=A&value=100";
+        //发送ajax请求
+        doAjaxPost(url, params, function (result) {
+            alert(result)
         });
     }
 
@@ -44,6 +57,24 @@
         //4.发送请求
         xhr.send(null);
     }
+
+
+    function doAjaxPost(url, params, callback) {
+        //1.创建异步请求对象XHR
+        var xhr = new XMLHttpRequest();
+        //2.设置状态监听
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                callback(xhr.responseText);
+            }
+        }
+        //3.建立连接(请求方式为post方式)
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        //4.发送请求
+        xhr.send(params);//post请求将将参数写到send方法内部
+    }
+
 </script>
 </body>
 </html>

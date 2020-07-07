@@ -24,4 +24,10 @@ public class AjaxController {
         return "query data by key " + key;
     }
 
+    @RequestMapping("doAjaxPostRequest")
+    @ResponseBody/*将响应的内容以串的形式返回*/
+    public String doAjaxPostRequest(String key, String value) {
+        return "save date[" + key + "," + value + "]";
+    }
+
 }
