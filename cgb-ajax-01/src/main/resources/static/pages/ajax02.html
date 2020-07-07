@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <button onclick="doAjaxGetRequest()">doAjaxGetRequest</button>
+    <button onclick="doAjaxPostRequest()">doAjaxPostRequest</button>
+</div>
+<div id="result"></div>
+<script src="/js/ajaxfk.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function doAjaxGetRequest() {
+        //定义请求url
+        var url = "/ajax/doAjaxGetRequest";
+        //定义请求参数
+        var params = "key=A";
+        //发送ajax请求
+        Ajax.doAjaxGet(url, params, function (result) {
+            var div = document.getElementById("result");
+            //innerHTML表示将result内容以html方式显示在obj对象内部
+            div.innerHTML = result;
+        });
+    }
+
+    function doAjaxPostRequest() {
+        //定义请求url
+        var url = "/ajax/doAjaxPostRequest";
+        //定义请求参数
+        var params = "key=A&value=100";
+        //发送ajax请求
+        Ajax.doAjaxPost(url, params, function (result) {
+            alert(result)
+        });
+    }
+</script>
+</body>
+</html>
