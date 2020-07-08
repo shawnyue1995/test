@@ -9,4 +9,6 @@ public interface ActivityService {
     List<Activity> findActivitys();
 
     int doDeleteById(Long id);
+
+    int saveObject(Activity entity);
 }

@@ -20,6 +20,13 @@ public class ActivityController {
         return "activity";
     }
 
+    @RequestMapping("/activity/doSaveObject")
+    @ResponseBody
+    public String doSaveObject(Activity entity) {
+        activityService.saveObject(entity);
+        return "save ok";
+    }
+
     @RequestMapping("/activity/doDeleteById")
     @ResponseBody
     public String deleteById(Long id) {

@@ -15,4 +15,8 @@ public interface ActivityDao {
 
     @Delete("delete from tb_activity where id=#{id}")
     int doDeleteById(Long id);
+
+    int insertObject(Activity entity);
+
+
 }

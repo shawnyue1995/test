@@ -25,4 +25,10 @@ public class ActivityServiceImpl implements ActivityService {
         return rows;
     }
 
+    @Override
+    public int saveObject(Activity entity) {
+        int rows = activityDao.insertObject(entity);
+        return rows;
+    }
+
 }
