@@ -14,11 +14,11 @@
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/target/classes" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../../../ideaworkspace_CGB2004_3JieDuan/CGB-JAVASE-01">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../ideaworkspace_CGB2004_3JieDuan/CGB-JAVASE-01/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../../ideaworkspace_CGB2004_3JieDuan/CGB-JAVASE-01/src/main/resources" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../../ideaworkspace_CGB2004_3JieDuan/CGB-JAVASE-01/src/test/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../../ideaworkspace_CGB2004_3JieDuan/CGB-JAVASE-01/src/test/resources" isTestSource="false" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-test-sources/test-annotations" isTestSource="false" />
     </content>

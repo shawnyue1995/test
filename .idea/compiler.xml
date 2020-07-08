@@ -8,18 +8,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cgb-springboot-01" />
+        <module name="cgb-activity-01" />
         <module name="CGB-DB-SYS-V3.02" />
         <module name="CGB-DB-SYS-V3.01" />
-        <module name="cgb-ajax-01" />
+        <module name="cgb-springboot-03" />
         <module name="cgb-springboot-07" />
         <module name="cgb-springboot-06" />
         <module name="cgb-springboot-05" />
         <module name="cgb-springboot-04" />
-        <module name="cgb-springboot-03" />
+        <module name="cgb-ajax-01" />
         <module name="cgb-springboot-02" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="cgb-activity-01" target="1.8" />
       <module name="cgb-ajax-01" target="1.8" />
       <module name="CGB-DB-SYS-V3.01" target="1.8" />
       <module name="CGB-DB-SYS-V3.02" target="1.8" />
@@ -33,6 +35,7 @@
       <module name="cgb-springboot-05" target="1.8" />
       <module name="cgb-springboot-06" target="1.8" />
       <module name="cgb-springboot-07" target="1.8" />
+      <module name="cgb-springboot-08" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -40,6 +43,7 @@
       <module name="CGB-DB-SYS-V3.01" options="-parameters" />
       <module name="CGB-DB-SYS-V3.02" options="-parameters" />
       <module name="CGB-SPRINGBOOT-03" options="-parameters" />
+      <module name="cgb-activity-01" options="-parameters" />
       <module name="cgb-ajax-01" options="-parameters" />
       <module name="cgb-sboot-01" options="-parameters" />
       <module name="cgb-springboot-01" options="-parameters" />
@@ -48,6 +52,7 @@
       <module name="cgb-springboot-04" options="-parameters" />
       <module name="cgb-springboot-05" options="-parameters" />
       <module name="cgb-springboot-06" options="-parameters" />
+      <module name="cgb-springboot-08" options="-parameters" />
     </option>
   </component>
 </project>
