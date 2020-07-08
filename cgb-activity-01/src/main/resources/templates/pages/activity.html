@@ -49,24 +49,23 @@
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="../../static/bootstrap/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    ($function()
-    {
-        //基于ajax技术向服务端发送异步请求获取数据,然后更新到页面上
-        function GetActivity() {
-        };
-    }
-    )
-    GetActivity()
-    {
-        //1.定义url
-        var url = "findAll";
-        //2.定义请求参数
-        //3.发送异步ajax请求,处理响应结果
-        //Jquery中Get函数应用
-        //向服务端发送Get请求,并将服务端返回Json格式字符串转换为Json格式的js对象
-        $.get(url, function (result) {//处理服务端响应的结果
-            //获取tbody对象
-            var tbody = $("#tbodyId");
+	($function()
+	{
+		//基于ajax技术向服务端发送异步请求获取数据,然后更新到页面上
+		GetActivity();
+	}
+	)
+
+	function GetActivity() {
+		//1.定义url
+		var url = "findAll";
+		//2.定义请求参数
+		//3.发送异步ajax请求,处理响应结果
+		//Jquery中Get函数应用
+		//向服务端发送Get请求,并将服务端返回Json格式字符串转换为Json格式的js对象
+		$.get(url, function (result) {//处理服务端响应的结果
+			//获取tbody对象
+			var tbody = $("#tbodyId");
             //清空tbody内容
             tbody.empty();
             //迭代result对象,并将result内容追加到tbody中
@@ -75,17 +74,16 @@
     }
 
     function doCreateRow(item) {
-        return `
-						<tr>
-						<td><input type="checkbox" value="${item.id}"></td>
-						<td>${item.title}</td>
-						<td>${item.category}</td>
-						<td>${item.state}</td>
-						<td>${item.startTime}</td>
-						<td>${item.endTime}</td>
-						<td>${item.remark}</td>
-						</tr>`
-    }
+		return `<tr>
+					<td><input type="checkbox" value="${item.id}"></td>
+					<td>${item.title}</td>
+					<td>${item.category}</td>
+					<td>${item.state}</td>
+					<td>${item.startTime}</td>
+					<td>${item.endTime}</td>
+					<td>${item.remark}</td>
+					</tr>`
+	}
 </script>
 </body>
 </html>
