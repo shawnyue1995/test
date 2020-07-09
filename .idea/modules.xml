@@ -15,6 +15,7 @@
       <module fileurl="file://$PROJECT_DIR$/cgb-springboot-05/cgb-springboot-05.iml" filepath="$PROJECT_DIR$/cgb-springboot-05/cgb-springboot-05.iml" />
       <module fileurl="file://$PROJECT_DIR$/cgb-springboot-06/cgb-springboot-06.iml" filepath="$PROJECT_DIR$/cgb-springboot-06/cgb-springboot-06.iml" />
       <module fileurl="file://$PROJECT_DIR$/cgb-springboot-07/cgb-springboot-07.iml" filepath="$PROJECT_DIR$/cgb-springboot-07/cgb-springboot-07.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgb_db_sys_v3_01/cgb_db_sys_v3_01.iml" filepath="$PROJECT_DIR$/cgb_db_sys_v3_01/cgb_db_sys_v3_01.iml" />
       <module fileurl="file://$PROJECT_DIR$/ideaworkspace_CGB2004_3JieDuan.iml" filepath="$PROJECT_DIR$/ideaworkspace_CGB2004_3JieDuan.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-js.iml" filepath="$PROJECT_DIR$/test-js.iml" />
     </modules>
