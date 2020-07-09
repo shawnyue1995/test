@@ -35,12 +35,13 @@ public class Activity {
     private String title;
     private String category;
     //此注解用于描述属性或set方法，告诉spring mvc 按指定格式接收客户端数据
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Shanghai")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")//应用场景对应set方法
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")//此注解用于描述或get方法
     private Date startTime;//java.util.Date
 
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Shanghai")
+    //将一个对象转换为json格式字符串时,底层会调用其get方法,然后基于@JsonFormat定义的日期格式进行转换
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Shanghai")//应用场景对应get方法
     private Date endTime;
     private String remark;
     private Integer state;

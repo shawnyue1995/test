@@ -95,7 +95,7 @@
         //3.发送异步ajax请求，处理响应结果
         //Jquery中Get函数应用
         //向服务端发送Get请求，并将服务端返回的json格式字符串转换为json格式的js对象
-        $.get(url, function (result) {//处理服务端响应的结果
+        $.get(url, function (result) {//callback处理服务端响应的结果
             //获取tbody对象
             var tBody = $("#tbodyId");
             //清空tbody中内容
@@ -112,7 +112,7 @@
 	           <td>${item.startTime}</td>
 	           <td>${item.endTime}</td>
 	           <td>${item.state == 1 ? '有效' : '无效'}</td>
-	           <td><button class='btn btn-warning btn-sm' onclick='doDeleteById(${item.id})'>delete</td>
+	           <td><button type='button' class='btn btn-warning btn-sm' onclick='doDeleteById(${item.id})'>delete</td>
 	         </tr>`;
     }
 
@@ -126,7 +126,7 @@
         //基于jquery中post函数发送异步请求
         $.post(url, params, function (result) {
             alert(result);
-            doGetActivitys();
+            doGetActivitys();//刷新
         })
     }
 
@@ -141,7 +141,7 @@
         $.ajax({
             "url": url,//请求url
             "method": "post",//请求方式
-            "dataType": "json",//服务器响应数据类型
+            "dataType": "text",//服务器响应数据类型
             "data": params,//向服务端传递的参数
             "success": function (result) {
                 console.log("result", result);
