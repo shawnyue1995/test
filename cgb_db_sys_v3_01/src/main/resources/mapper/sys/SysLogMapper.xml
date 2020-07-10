@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.pj.sys.dao.SysLogDao">
+
+    <!--通过sql标签提取sql中共性-->
+    <sql id="sql">
+        from sys_logs
+        <if test="username!=null and username!=''">
+            <where>
+                username like concat("%",#{username},"%")
+            </where>
+        </if>
+    </sql>
+
+    <!--查询当前页记录总数-->
+    <select id="findPageObjects" resultType="com.cy.pj.sys.pojo.SysLog">
+        select *
+        /*包含id为queryWhereId的sql元素*/
+        <include refid="sql"/>
+        order by createdTime
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!--按条件查询总记录数-->
+    <select id="getRowCount" resultType="int">
+        select count(*)
+        <include refid="sql"/>
+    </select>
+
+</mapper>

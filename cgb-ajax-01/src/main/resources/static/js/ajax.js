@@ -9,6 +9,13 @@ function doAjaxGet(url, params, callback) {
     var xhr = new XMLHttpRequest();
     //2.设置状态监听
     xhr.onreadystatechange = function () {
+        //基于xhr对象获取的通讯状态，对响应数据进行处理
+        //readyState状态说明
+        //0：未初始化，尚未调用open() 方法
+        //1：启动。已经调用open() 方法，但尚未调用send() 方法
+        //2：发送。已经调用send() 方法，但尚未接收到响应
+        //3：接收。已经接收到部分响应
+        //4：完成。已经接收到全部响应数据，而且已经可以在客户端使用了
         if (xhr.readyState == 4 && xhr.status == 200) {
             callback(xhr.responseText);
         }
