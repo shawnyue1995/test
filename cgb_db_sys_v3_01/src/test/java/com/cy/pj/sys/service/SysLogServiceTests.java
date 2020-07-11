@@ -1,6 +1,6 @@
 package com.cy.pj.sys.service;
 
-import com.cy.pj.common.vo.PageObject;
+import com.cy.pj.common.pojo.PageObject;
 import com.cy.pj.sys.pojo.SysLog;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

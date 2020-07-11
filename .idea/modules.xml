@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.01/CGB-DB-SYS-V3.01.iml" filepath="$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.01/CGB-DB-SYS-V3.01.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.02/CGB-DB-SYS-V3.02.iml" filepath="$PROJECT_DIR$/../kejian/三阶段/CGBIII-课前资料/CGBIII-课前资料/CODES/CGB-DB-SYS-V3.02/CGB-DB-SYS-V3.02.iml" />
       <module fileurl="file://$PROJECT_DIR$/CGB-JAVASE-01/CGB-JAVASE-01.iml" filepath="$PROJECT_DIR$/CGB-JAVASE-01/CGB-JAVASE-01.iml" />
       <module fileurl="file://$PROJECT_DIR$/Test-JS/Test-JS.iml" filepath="$PROJECT_DIR$/Test-JS/Test-JS.iml" />
       <module fileurl="file://$PROJECT_DIR$/cgb-activity-01/cgb-activity-01.iml" filepath="$PROJECT_DIR$/cgb-activity-01/cgb-activity-01.iml" />

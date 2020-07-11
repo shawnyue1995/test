@@ -47,9 +47,97 @@
 	</div>
 </div>
 <script type="text/javascript">
-$(function () {
-    $('#pageId').load("doPageUI");
-});
+	//JS中问题解决方案：debugger，console.log(),排除法
+	$(function () {
+		//debugger
+		//当日志列表页面加载完成以后，加载分页页面。
+		// $("#pageId").load("doPageUI",function(){//资源加载完成以后执行
+		//异步加载用户行为日志信息
+		// doGetObjects();
+		// });
+		//上面写法的简化形式
+		$("#pageId").load("doPageUI", doGetObjects);//不要写成doGetObjects()
+	});
+
+	//开启ajax异步任务，按条件加载用户行为日志信息
+	function doGetObjects() {
+		//1.定义请求参数
+		//1.1定义请求参数的方式1
+		//var params="pageCurremt=1;
+		//1.2定义请求参数的方式2：
+		var params = {"pageCurrent": 1};
+		//2.定义请求url
+		var url = "log/doFindPageObjects";
+		//2.发起异步请求,处理响应结果
+		// $.getJSON(url,params,function (result) {
+		// 	doHandleQueryResponseResult(result);
+		// });//特殊的ajax函数
+		//如上的简写形式
+		$.getJSON(url, params, doHandleQueryResponseResult);
+		//getJSON函数内部的实现是如下形式
+		/*$.ajax({
+            url:url,
+            dataType:"json",
+            data:params,
+            success:doHandleQueryResponseResult
+         });*/
+
+		//$.ajax底层实现
+		/*
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+           if(xhr.readyState==4&&xhr.status==200){
+               doHandleQueryResponseResult(JSON.parse(xhr.responseText));
+           }
+        };
+        xhr.open("Get","log/doFindPageObjects?pageCurrent=1",true);
+        xhr.send(null);
+        */
+	}
+
+	function doHandleQueryResponseResult(result) {//result为json格式的js对象
+		/*		console.log("result",result);
+                console.log("result.state",result.state);
+                console.log("result.data",result.data);//对应服务端的pageObject
+                console.log("result.data.records",result.data.records);//对应服务端查询到的用户日志*/
+		if (result.state == 1) {//state==1表示正常的响应数据
+			//将result.data.records呈现在log_list.html的tbody位置
+			doSetTableBodyRows(result.data.records);
+			//将result.data中的分页信息呈现在page.html指定位置
+		} else {
+			alert(result.message);
+		}
+	}
+
+	//更新table对象的tbody位置的内容
+	function doSetTableBodyRows(records) {
+		//1.获得tBody对象并清空原有内容
+		var tBody = $('#tbodyId');
+		tBody.empty();
+		//2.迭代records记录并将其追加到tbody中
+		//方法1
+		/*
+        for(var i=0;i<records.legnth;i++){
+            tBody.append(doCreateRows(records[i]));
+        }
+        */
+		//方法2：
+		records.forEach((item) => tBody.append(doCreateRows(item)));
+	}
+
+	//基于记录创建行（tr）对象
+	function doCreateRows(item) {
+		//debugger
+		return `<tr>
+				<td><input type="checkbox" value=${item.id}></td>
+				<td>${item.username}</td>
+				<td>${item.operation}</td>
+				<td>${item.method}</td>
+				<td>${item.params}</td>
+				<td>${item.ip}</td>
+				<td>${item.time}</td>
+				</tr>`;
+	}
 </script>
 
 

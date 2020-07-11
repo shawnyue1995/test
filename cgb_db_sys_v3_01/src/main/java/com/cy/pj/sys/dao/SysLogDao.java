@@ -2,6 +2,7 @@ package com.cy.pj.sys.dao;
 
 import com.cy.pj.sys.pojo.SysLog;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface SysLogDao {
      * @param username 查询条件
      * @return 查询到的记录总数
      */
-    int getRowCount(String username);
+    int getRowCount(@Param("username") String username);
 
     /**
      * 基于条件查询当前页记录
@@ -24,5 +25,7 @@ public interface SysLogDao {
      * @return 查询到的记录
      */
 
-    List<SysLog> findPageObjects(String username, Integer startIndex, Integer pageSize);
+    List<SysLog> findPageObjects(@Param("username") String username,
+                                 @Param("startIndex") Integer startIndex,
+                                 @Param("pageSize") Integer pageSize);
 }
