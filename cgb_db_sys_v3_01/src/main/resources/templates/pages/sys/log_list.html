@@ -58,6 +58,17 @@
 		//上面写法的简化形式
 		$("#pageId").load("doPageUI", doGetObjects);//不要写成doGetObjects()
 	});
+	//查询按钮事件注册
+	$(".input-group-btn").on("click", ".btn-search", doQueryObjects)
+
+	function doQueryObjects() {
+		//为什么要在此位置初始化pageCurrent的值为1？
+		//数据查询时页码的初始化位置也应该是第一页
+		$("#pageId").data("pageCurrent", 1);
+		//为什么要调用doGetObjects函数
+		//重用js代码，简化js代码编写
+		doGetObjects();
+	}
 
 	//开启ajax异步任务，按条件加载用户行为日志信息
 	function doGetObjects() {
@@ -68,6 +79,18 @@
 		var params = {"pageCurrent": 1};
 		//2.定义请求url
 		var url = "log/doFindPageObjects";
+		//? 请问data函数的含义是什么？(从指定元素上获取绑定的数据)
+		//此数据会在何时进行绑定？(setPagination,doQueryObjects)
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
+		//pageCurrent参数在没有赋值的情况下，默认初始值应该为1.
+		if (!pageCurrent) pageCurrent = 1;
+		var params = {"pageCurrent": pageCurrent};//pageCurrent=2
+		//为什么此位置要获取查询参数的值？
+		//一种冗长的应用方法，目的是让此函数在查询时可以重用
+		var username = $("#searchNameId").val();
+		//如下语句的含义是什么？动态在json格式js对象中添加key/value,
+		if (username) params.username = username;//查询时需要
 		//2.发起异步请求,处理响应结果
 		// $.getJSON(url,params,function (result) {
 		// 	doHandleQueryResponseResult(result);
