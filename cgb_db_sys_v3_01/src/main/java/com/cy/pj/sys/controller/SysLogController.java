@@ -31,5 +31,8 @@ public class SysLogController {
         //控制层对业务数据再次封装
         //方法1
         return new JsonResult(pageObject);//此位置封装为业务的正常数据
+        //1）此值会返回给DispatcherServlet对象
+        //2）DispatcherServlet对象会将JsonResult转换为json格式的字符串然后相应到客户端
+        //3）转换过程是DispatcherServlet对象调用了jackson api来实现的
     }
 }

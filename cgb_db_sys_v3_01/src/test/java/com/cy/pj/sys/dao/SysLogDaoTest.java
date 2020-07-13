@@ -14,6 +14,12 @@ public class SysLogDaoTest {
     private SysLogDao sysLogDao;
 
     @Test
+    void testDeleteObjects() {
+        int rows = sysLogDao.deleteObjects(11, 12);
+        System.out.println("delete.rows=" + rows);
+    }
+
+    @Test
     void testGetRowCount() {
         int rowCount = sysLogDao.getRowCount("admin");
         System.out.println("rowCount=" + rowCount);

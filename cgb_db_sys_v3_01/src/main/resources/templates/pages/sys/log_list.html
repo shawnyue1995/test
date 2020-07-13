@@ -56,6 +56,8 @@
 		$("#pageId").load("doPageUI", doGetObjects);
 		//查询按钮事件注册
 		$(".input-group-btn")
+				//on函数为Jquery中的以一个事件注册函数（推荐）
+				//on函数语法：$("选择器").on("事件"，"子元素选择器"[,数据],事件处理函数)
 				.on("click", ".btn-search", doQueryObjects)
 				.on("click", ".btn-delete", doDeleteObjects)
 		//全选checkbox事件注册
@@ -148,7 +150,7 @@
 	function doQueryObjects() {
 		//为什么要在此位置初始化pageCurrent的值为1？
 		//数据查询时页码的初始化位置也应该是第一页
-		$("#pageId").data("pageCurrent", 1);
+		$("#pageId").data("pageCurrent", 1);//设置当前页码值
 		//为什么要调用doGetObjects函数
 		//重用js代码，简化js代码编写
 		doGetObjects();
@@ -156,25 +158,25 @@
 
 	//开启ajax异步任务，按条件加载用户行为日志信息
 	function doGetObjects() {
+		//debugger
 		//1.定义请求参数
+		//? 请问data函数的含义是什么？(从指定元素上获取绑定的数据)
+		//此数据会在何时进行绑定？(setPagination,doQueryObjects)
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
+		//pageCurrent参数在没有赋值的情况下，默认初始值应该为1
+		if (!pageCurrent) pageCurrent = 1;
 		//1.1定义请求参数的方式1
 		//var params="pageCurremt=1;
 		//1.2定义请求参数的方式2：
 		var params = {"pageCurrent": 1};
 		//2.定义请求url
 		var url = "log/doFindPageObjects";
-		//? 请问data函数的含义是什么？(从指定元素上获取绑定的数据)
-		//此数据会在何时进行绑定？(setPagination,doQueryObjects)
-		var pageCurrent = $("#pageId").data("pageCurrent");
-		//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
-		//pageCurrent参数在没有赋值的情况下，默认初始值应该为1.
-		if (!pageCurrent) pageCurrent = 1;
 		var params = {"pageCurrent": pageCurrent};//pageCurrent=2
-		//为什么此位置要获取查询参数的值？
-		//一种冗长的应用方法，目的是让此函数在查询时可以重用
+		//获取用户输入的用户名
 		var username = $("#searchNameId").val();
-		//如下语句的含义是什么？动态在json格式js对象中添加key/value,
-		if (username) params.username = username;//查询时需要
+		//如下语句的含义是什么？动态在json格式js对象中添加key/value
+		if (username) params.username = username;//这里的key需要与服务端接收参数时使用的名字相同。
 		//2.发起异步请求,处理响应结果
 		// $.getJSON(url,params,function (result) {
 		// 	doHandleQueryResponseResult(result);
@@ -211,6 +213,7 @@
 			//将result.data.records呈现在log_list.html的tbody位置
 			doSetTableBodyRows(result.data.records);
 			//将result.data中的分页信息呈现在page.html指定位置
+			doSetPagination(result.data);//result.data对应的是服务端业务层PageObject
 		} else {
 			alert(result.message);
 		}

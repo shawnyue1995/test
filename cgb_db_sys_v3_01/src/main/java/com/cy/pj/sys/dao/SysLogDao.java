@@ -8,8 +8,13 @@ import java.util.List;
 
 @Mapper
 public interface SysLogDao {
-
-    int deleteObjects(@Param("ids") Integer[] ids);
+    /**
+     * 基于id执行删除操作
+     *
+     * @param ids 记录id（可变参数）
+     * @return
+     */
+    int deleteObjects(@Param("ids") Integer... ids);
 
     /**
      * 基于条件查询用户行为日志记录总数
