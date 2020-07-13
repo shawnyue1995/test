@@ -429,13 +429,17 @@ desired effect
 
     /**
      * 基于不同对象的点击事件执行资源加载操作
-     *
-     * click时间处理函数
-     * JQuery中的load函数为一个异步加载的ajax函数
-     * #mainContentId:用于在指定位置异步加载资源(并将返回的资源填充到这个位置)
      */
     function doLoadUI(id, url) {
-        $('#' + id).click(function () {
+        $('#' + id).click(function () {//click事件处理函数
+            /**
+             * $.get(url,function(result){
+             *     $('#mainContentId').html(result);
+             * },"html");
+             */
+            //简写形式：
+            //JQuery中的load函数是一个异步加载的ajax函数
+            //此函数用于在指定位置异步加载资源(并将返回的资源填充到这个位置)
             $("#mainContentId").load(url);
         });
     }

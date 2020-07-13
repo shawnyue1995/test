@@ -16,6 +16,13 @@ public class SysLogController {
     @Autowired
     private SysLogService sysLogService;
 
+    @RequestMapping("doDeleteObjects")
+    @ResponseBody
+    public JsonResult doDeleteObjects(Integer... ids) {
+        sysLogService.deleteObjects(ids);
+        return new JsonResult("delete ok");
+    }
+
     @RequestMapping("doFindPageObjects")
     @ResponseBody
     public JsonResult doFindObjects(String username, Integer pageCurrent) {

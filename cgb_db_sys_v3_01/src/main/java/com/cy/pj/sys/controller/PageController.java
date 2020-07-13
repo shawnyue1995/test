@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 @Controller
 public class PageController {
+
     @Autowired
     private SysLogService sysLogService;
 
@@ -29,4 +30,11 @@ public class PageController {
         return "sys/log_list";
     }
 
+    /**
+     * 基于此方法返回分页页面
+     */
+    @RequestMapping("doPageUI")
+    public String doPageUI() {
+        return "common/page";
+    }
 }

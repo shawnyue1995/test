@@ -4,6 +4,8 @@ import com.cy.pj.common.pojo.PageObject;
 import com.cy.pj.sys.pojo.SysLog;
 
 public interface SysLogService {
+    int deleteObjects(Integer... ids);
+
     /**
      * 基于条件进行分页查询
      *

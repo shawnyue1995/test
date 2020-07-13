@@ -49,18 +49,102 @@
 <script type="text/javascript">
 	//JS中问题解决方案：debugger，console.log(),排除法
 	$(function () {
-		//debugger
-		//当日志列表页面加载完成以后，加载分页页面。
-		// $("#pageId").load("doPageUI",function(){//资源加载完成以后执行
-		//异步加载用户行为日志信息
-		// doGetObjects();
-		// });
+		//  $("#pageId").load("doPageUI",function(){
+		//   doGetObjects();
+		//});
 		//上面写法的简化形式
-		$("#pageId").load("doPageUI", doGetObjects);//不要写成doGetObjects()
+		$("#pageId").load("doPageUI", doGetObjects);
+		//查询按钮事件注册
+		$(".input-group-btn")
+				.on("click", ".btn-search", doQueryObjects)
+				.on("click", ".btn-delete", doDeleteObjects)
+		//全选checkbox事件注册
+		$("#checkAll").change(doChangeTBodyCheckBoxState)
+		//body中checkbox事件注册
+		//采用如下注册方式不可以，为什么呢？(因为页面加载完成以后，tbody中的checkbox对象还不存在)
+		//$(".cBox").change(doChangeTHeadCheckBoxState);
+		//在tbodyId对应的对象上注册change事件，当点击tbodyId对象内容的cBox元素时，执行事件处理函数
+		$("#tbodyId").on("change", ".cBox", doChangeTHeadCheckBoxState)
 	});
-	//查询按钮事件注册
-	$(".input-group-btn").on("click", ".btn-search", doQueryObjects)
 
+	function doChangeTHeadCheckBoxState() {
+		//1.设定默认值
+		var flag = true;
+		//2.迭代所有tbody中的checkbox值并进行与操作
+		$("#tbodyId input[type='checkbox']").each(function () {
+			flag = flag & $(this).prop("checked", flag);
+		});
+		//3.修改全选元素checkbox的值为flag
+		$("checkAll").prop("checkbox", flag);
+	}
+
+	function doChangeTBodyCheckBoxState() {
+		//1.获取当前点击对象的checked属性的值
+		var flag = $(this).prop("checked");//true or false
+		//2.将tbody中所有checkbox元素的值都修改为flag对应的值
+		//第一种方案
+		/*		$("#tbodyId input[naem='cItem']").each(function () {
+                    $(this).prop("checked",flag);
+                });*/
+		//2.第二种方案
+		$("#tbodyId input[type='checkbox']").prop("checked", flag);
+	}
+
+	function doGetCheckedIds() {
+		//定义一个数组，用于存储选中的checkbox的id值
+		var array = [];//new Array();
+		//获取tbody中所有类型为checkbox的input元素
+		$("#tbodyId input[type=checkbox]").
+				//迭代这些元素，每发现一个元素都会执行如下回调函数
+				each(function () {
+					//假如此元素的checked属性的值为true
+					if ($(this).prop("checked")) {
+						//调用数组的push方法将选中对象的值存储到数组
+						array.push($(this).val());
+					}
+				});
+		return array;
+	}
+
+	//执行删除操作
+	function doDeleteObjects() {
+		//1.获取选中的id值，并构建请求参数
+		var ids = doGetCheckedIds();//[1,2,3,4]
+		if (ids.length == 0) {
+			alert("至少选择一个");
+			return;
+		}
+		//2.发异步请求执行删除操作
+		if (!confirm("您确定删除吗？")) return;
+		var url = "log/doDeleteObjects";
+		var param = {"ids": ids.toString()};//{ids:"1,2,3"}
+		console.log(params);
+		$.post(url, param, function (result) {
+			if (result.state == 1) {
+				alert(result.message);
+				//doGetObjects();
+				doRefreshAfterDeleteOK();
+			} else {
+				alert(result.message);
+			}
+		});
+	}
+
+	//删除以后的刷新操作
+	function doRefreshAfterDeleteOK() {
+		//1.判定是否是最后一页，假如是最后一页我们需要进行特殊处理
+		var pageCount = $("#pageId").data(pageCount);
+		var pageCurrent = $("#pageId").data(pageCurrent);
+		var checked = $("#checkAll").prop("checked");
+		if (pageCurrent == pageCount && checked && pageCurrent > 1) {
+			pageCurrent--;
+			$("#pageId").data("pageCurrent", pageCurrent);
+		}
+		//2.重新执行查询
+		doGetObjects();
+	}
+
+	//基于用户名执行日志信息查询
 	function doQueryObjects() {
 		//为什么要在此位置初始化pageCurrent的值为1？
 		//数据查询时页码的初始化位置也应该是第一页
@@ -140,7 +224,7 @@
 		//2.迭代records记录并将其追加到tbody中
 		//方法1
 		/*
-        for(var i=0;i<records.legnth;i++){
+        for(var i=0;i<records.length;i++){
             tBody.append(doCreateRows(records[i]));
         }
         */
