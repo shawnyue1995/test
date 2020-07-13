@@ -55,12 +55,12 @@
 		//上面写法的简化形式
 		$("#pageId").load("doPageUI", doGetObjects);
 		//查询按钮事件注册
+		//on函数为Jquery中的以一个事件注册函数（推荐）
+		//on函数语法：$("选择器").on("事件"，"子元素选择器"[,数据],事件处理函数)
 		$(".input-group-btn")
-				//on函数为Jquery中的以一个事件注册函数（推荐）
-				//on函数语法：$("选择器").on("事件"，"子元素选择器"[,数据],事件处理函数)
 				.on("click", ".btn-search", doQueryObjects)
-				.on("click", ".btn-delete", doDeleteObjects)
-		//全选checkbox事件注册
+				.on("click", ".btn-delete", doDeleteObjects);
+		//全选checkbox事件注册(一般与状态相关的事件会用change)
 		$("#checkAll").change(doChangeTBodyCheckBoxState)
 		//body中checkbox事件注册
 		//采用如下注册方式不可以，为什么呢？(因为页面加载完成以后，tbody中的checkbox对象还不存在)
@@ -69,17 +69,19 @@
 		$("#tbodyId").on("change", ".cBox", doChangeTHeadCheckBoxState)
 	});
 
+	//基于Tbody中checkbox对象的状态修改thead中checkbox对象的状态
 	function doChangeTHeadCheckBoxState() {
 		//1.设定默认值
 		var flag = true;
-		//2.迭代所有tbody中的checkbox值并进行与操作
+		//2.迭代所有tbody中的checkbox对象的checked属性的值并进行与操作
 		$("#tbodyId input[type='checkbox']").each(function () {
-			flag = flag & $(this).prop("checked", flag);
+			flag = flag && $(this).prop("checked", flag);
 		});
 		//3.修改全选元素checkbox的值为flag
 		$("checkAll").prop("checkbox", flag);
 	}
 
+	//修改tbody中checkbox对象的状态
 	function doChangeTBodyCheckBoxState() {
 		//1.获取当前点击对象的checked属性的值
 		var flag = $(this).prop("checked");//true or false
@@ -96,9 +98,9 @@
 		//定义一个数组，用于存储选中的checkbox的id值
 		var array = [];//new Array();
 		//获取tbody中所有类型为checkbox的input元素
-		$("#tbodyId input[type=checkbox]").
+		$("#tbodyId input[type=checkbox]")
 				//迭代这些元素，每发现一个元素都会执行如下回调函数
-				each(function () {
+				.each(function () {
 					//假如此元素的checked属性的值为true
 					if ($(this).prop("checked")) {
 						//调用数组的push方法将选中对象的值存储到数组
@@ -111,21 +113,26 @@
 	//执行删除操作
 	function doDeleteObjects() {
 		//1.获取选中的id值，并构建请求参数
+		//1.1获取用户选中记录的id值并将其存储到数组
 		var ids = doGetCheckedIds();//[1,2,3,4]
+		//1.2判定是否选中
 		if (ids.length == 0) {
 			alert("至少选择一个");
 			return;
 		}
-		//2.发异步请求执行删除操作
+		//1.3给出提示确定删除吗》？
 		if (!confirm("您确定删除吗？")) return;
+		//1.4构建请求参数
+		var params = {"ids": ids.toString()};//{ids:"1,2,3"}
+		//2.定义请求url
 		var url = "log/doDeleteObjects";
-		var param = {"ids": ids.toString()};//{ids:"1,2,3"}
 		console.log(params);
-		$.post(url, param, function (result) {
+		//3.发异步请求执行删除操作
+		$.post(url, params, function (result) {
 			if (result.state == 1) {
 				alert(result.message);
 				//doGetObjects();
-				doRefreshAfterDeleteOK();
+				doRefreshAfterDeleteOK();//刷新
 			} else {
 				alert(result.message);
 			}

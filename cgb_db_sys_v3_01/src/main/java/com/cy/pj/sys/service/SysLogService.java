@@ -4,6 +4,18 @@ import com.cy.pj.common.pojo.PageObject;
 import com.cy.pj.sys.pojo.SysLog;
 
 public interface SysLogService {
+
+    /**
+     * 执行日志新增操作
+     */
+    void saveObject(SysLog entity);
+
+    /**
+     * 基于记录id执行日志删除操作
+     *
+     * @param ids
+     * @return
+     */
     int deleteObjects(Integer... ids);
 
     /**

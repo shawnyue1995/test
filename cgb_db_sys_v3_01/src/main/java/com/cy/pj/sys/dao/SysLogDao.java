@@ -9,6 +9,14 @@ import java.util.List;
 @Mapper
 public interface SysLogDao {
     /**
+     * 执行新增操作
+     *
+     * @param entity
+     * @return
+     */
+    int insertObjects(SysLog entity);
+
+    /**
      * 基于id执行删除操作
      *
      * @param ids 记录id（可变参数）
