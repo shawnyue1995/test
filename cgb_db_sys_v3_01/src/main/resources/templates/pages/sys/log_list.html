@@ -1,205 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="hhtp://www.thymeleaf.org">
 <div class="row">
-	<div class="col-xs-12">
-		<div class="box">
-			<div class="box-header">
-				<h3 class="box-title">日志管理</h3>
-				<div class="box-tools">
-					<div class="input-group input-group-sm" style="width: 350px;">
-						<input class="form-control pull-right" id="searchNameId" name="table_search"
-							   placeholder="用户名" type="text">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">日志管理</h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 350px;">
+                        <input class="form-control pull-right" id="searchNameId" name="table_search"
+                               placeholder="用户名" type="text">
 
-						<div class="input-group-btn">
-							<button class="btn btn-default btn-search" type="button">
-								<i class="fa fa-search"></i>
-							</button>
-							<button class="btn btn-default btn-delete" type="button">删除</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /.box-header -->
-			<div class="box-body table-responsive no-padding">
-				<table class="table table-hover">
-					<thead>
-					<tr>
-						<th><input id="checkAll" type="checkbox">全选</th>
-						<th>用户名</th>
-						<th>操作</th>
-						<th>请求方法</th>
-						<th>请求参数</th>
-						<th>IP</th>
-						<th>执行时长</th>
-					</tr>
-					</thead>
-					<tbody id="tbodyId">
-					<tr>
-						<td colspan="7">数据正在加载中...</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="box-footer clearfix" dm="100" id="pageId">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default btn-search" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <button class="btn btn-default btn-delete" type="button">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th><input id="checkAll" type="checkbox">全选</th>
+                        <th>用户名</th>
+                        <th>操作</th>
+                        <th>请求方法</th>
+                        <th>请求参数</th>
+                        <th>IP</th>
+                        <th>执行时长</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyId">
+                    <tr>
+                        <td colspan="7">数据正在加载中...</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer clearfix" dm="100" id="pageId" th:insert="common/page::pageFragment">
+                <!--希望使用thymeleaf中th:insert元素将page.html内容插入到此位置-->
 
-			</div>
-			<!-- /.box-body -->
-		</div>
-		<!-- /.box -->
-	</div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
 </div>
 <script type="text/javascript">
-	//JS中问题解决方案：debugger，console.log(),排除法
-	$(function () {
-		//  $("#pageId").load("doPageUI",function(){
-		//   doGetObjects();
-		//});
-		//上面写法的简化形式
-		$("#pageId").load("doPageUI", doGetObjects);
-		//查询按钮事件注册
-		//on函数为Jquery中的以一个事件注册函数（推荐）
-		//on函数语法：$("选择器").on("事件"，"子元素选择器"[,数据],事件处理函数)
-		$(".input-group-btn")
-				.on("click", ".btn-search", doQueryObjects)
-				.on("click", ".btn-delete", doDeleteObjects);
-		//全选checkbox事件注册(一般与状态相关的事件会用change)
-		$("#checkAll").change(doChangeTBodyCheckBoxState)
-		//body中checkbox事件注册
-		//采用如下注册方式不可以，为什么呢？(因为页面加载完成以后，tbody中的checkbox对象还不存在)
-		//$(".cBox").change(doChangeTHeadCheckBoxState);
-		//在tbodyId对应的对象上注册change事件，当点击tbodyId对象内容的cBox元素时，执行事件处理函数
-		$("#tbodyId").on("change", ".cBox", doChangeTHeadCheckBoxState)
-	});
+    //JS中问题解决方案：debugger，console.log(),排除法
+    $(function () {
+        //  $("#pageId").load("doPageUI",function(){
+        //   doGetObjects();
+        //});
+        //上面写法的简化形式
+        //$("#pageId").load("doPageUI", doGetObjects);
+        doGetObjects();
+        //查询按钮事件注册
+        //on函数为Jquery中的以一个事件注册函数（推荐）
+        //on函数语法：$("选择器").on("事件"，"子元素选择器"[,数据],事件处理函数)
+        $(".input-group-btn")
+            .on("click", ".btn-search", doQueryObjects)
+            .on("click", ".btn-delete", doDeleteObjects);
 
-	//基于Tbody中checkbox对象的状态修改thead中checkbox对象的状态
-	function doChangeTHeadCheckBoxState() {
-		//1.设定默认值
-		var flag = true;
-		//2.迭代所有tbody中的checkbox对象的checked属性的值并进行与操作
-		$("#tbodyId input[type='checkbox']").each(function () {
-			flag = flag && $(this).prop("checked", flag);
-		});
-		//3.修改全选元素checkbox的值为flag
-		$("checkAll").prop("checkbox", flag);
-	}
+        //全选checkbox事件注册(一般与状态相关的事件会用change)
+        $("#checkAll").change(doChangeTBodyCheckBoxState)
+        //body中checkbox事件注册
+        //采用如下注册方式不可以，为什么呢？(因为页面加载完成以后，tbody中的checkbox对象还不存在)
+        //$(".cBox").change(doChangeTHeadCheckBoxState);
+        //在tbodyId对应的对象上注册change事件，当点击tbodyId对象内容的cBox元素时，执行事件处理函数
+        $("#tbodyId").on("change", ".cBox", doChangeTHeadCheckBoxState)
+    });
 
-	//修改tbody中checkbox对象的状态
-	function doChangeTBodyCheckBoxState() {
-		//1.获取当前点击对象的checked属性的值
-		var flag = $(this).prop("checked");//true or false
-		//2.将tbody中所有checkbox元素的值都修改为flag对应的值
-		//第一种方案
-		/*		$("#tbodyId input[naem='cItem']").each(function () {
+    //基于Tbody中checkbox对象的状态修改thead中checkbox对象的状态
+    function doChangeTHeadCheckBoxState() {
+        //1.设定默认值
+        var flag = true;
+        //2.迭代所有tbody中的checkbox对象的checked属性的值并进行与操作
+        $("#tbodyId input[type='checkbox']").each(function () {
+            flag = flag && $(this).prop("checked", flag);
+        });
+        //3.修改全选元素checkbox的值为flag
+        $("checkAll").prop("checkbox", flag);
+    }
+
+    //修改tbody中checkbox对象的状态
+    function doChangeTBodyCheckBoxState() {
+        //1.获取当前点击对象的checked属性的值
+        var flag = $(this).prop("checked");//true or false
+        //2.将tbody中所有checkbox元素的值都修改为flag对应的值
+        //第一种方案
+        /*		$("#tbodyId input[naem='cItem']").each(function () {
                     $(this).prop("checked",flag);
                 });*/
-		//2.第二种方案
-		$("#tbodyId input[type='checkbox']").prop("checked", flag);
-	}
+        //2.第二种方案
+        $("#tbodyId input[type='checkbox']").prop("checked", flag);
+    }
 
-	function doGetCheckedIds() {
-		//定义一个数组，用于存储选中的checkbox的id值
-		var array = [];//new Array();
-		//获取tbody中所有类型为checkbox的input元素
-		$("#tbodyId input[type=checkbox]")
-				//迭代这些元素，每发现一个元素都会执行如下回调函数
-				.each(function () {
-					//假如此元素的checked属性的值为true
-					if ($(this).prop("checked")) {
-						//调用数组的push方法将选中对象的值存储到数组
-						array.push($(this).val());
-					}
-				});
-		return array;
-	}
+    function doGetCheckedIds() {
+        //定义一个数组，用于存储选中的checkbox的id值
+        var array = [];//new Array();
+        //获取tbody中所有类型为checkbox的input元素
+        $("#tbodyId input[type=checkbox]")
+            //迭代这些元素，每发现一个元素都会执行如下回调函数
+            .each(function () {
+                //假如此元素的checked属性的值为true
+                if ($(this).prop("checked")) {
+                    //调用数组的push方法将选中对象的值存储到数组
+                    array.push($(this).val());
+                }
+            });
+        return array;
+    }
 
-	//执行删除操作
-	function doDeleteObjects() {
-		//1.获取选中的id值，并构建请求参数
-		//1.1获取用户选中记录的id值并将其存储到数组
-		var ids = doGetCheckedIds();//[1,2,3,4]
-		//1.2判定是否选中
-		if (ids.length == 0) {
-			alert("至少选择一个");
-			return;
-		}
-		//1.3给出提示确定删除吗》？
-		if (!confirm("您确定删除吗？")) return;
-		//1.4构建请求参数
-		var params = {"ids": ids.toString()};//{ids:"1,2,3"}
-		//2.定义请求url
-		var url = "log/doDeleteObjects";
-		console.log(params);
-		//3.发异步请求执行删除操作
-		$.post(url, params, function (result) {
-			if (result.state == 1) {
-				alert(result.message);
-				//doGetObjects();
-				doRefreshAfterDeleteOK();//刷新
-			} else {
-				alert(result.message);
-			}
-		});
-	}
+    //执行删除操作
+    function doDeleteObjects() {
+        //1.获取选中的id值，并构建请求参数
+        //1.1获取用户选中记录的id值并将其存储到数组
+        var ids = doGetCheckedIds();//[1,2,3,4]
+        //1.2判定是否选中
+        if (ids.length == 0) {
+            alert("至少选择一个");
+            return;
+        }
+        //1.3给出提示确定删除吗》？
+        if (!confirm("您确定删除吗？")) return;
+        //1.4构建请求参数
+        var params = {"ids": ids.toString()};//{ids:"1,2,3"}
+        //2.定义请求url
+        var url = "log/doDeleteObjects";
+        console.log(params);
+        //3.发异步请求执行删除操作
+        $.post(url, params, function (result) {
+            if (result.state == 1) {
+                alert(result.message);
+                //doGetObjects();
+                doRefreshAfterDeleteOK();//刷新
+            } else {
+                alert(result.message);
+            }
+        });
+    }
 
-	//删除以后的刷新操作
-	function doRefreshAfterDeleteOK() {
-		//1.判定是否是最后一页，假如是最后一页我们需要进行特殊处理
-		var pageCount = $("#pageId").data(pageCount);
-		var pageCurrent = $("#pageId").data(pageCurrent);
-		var checked = $("#checkAll").prop("checked");
-		if (pageCurrent == pageCount && checked && pageCurrent > 1) {
-			pageCurrent--;
-			$("#pageId").data("pageCurrent", pageCurrent);
-		}
-		//2.重新执行查询
-		doGetObjects();
-	}
+    //删除以后的刷新操作
+    function doRefreshAfterDeleteOK() {
+        //1.判定是否是最后一页，假如是最后一页我们需要进行特殊处理
+        var pageCount = $("#pageId").data("pageCount");
+        var pageCurrent = $("#pageId").data("pageCurrent");
+        var checked = $("#checkAll").prop("checked");
+        if (pageCurrent == pageCount && checked && pageCurrent > 1) {
+            pageCurrent--;
+            $("#pageId").data("pageCurrent", pageCurrent);
+        }
+        //2.重新执行查询
+        doGetObjects();
+    }
 
-	//基于用户名执行日志信息查询
-	function doQueryObjects() {
-		//为什么要在此位置初始化pageCurrent的值为1？
-		//数据查询时页码的初始化位置也应该是第一页
-		$("#pageId").data("pageCurrent", 1);//设置当前页码值
-		//为什么要调用doGetObjects函数
-		//重用js代码，简化js代码编写
-		doGetObjects();
-	}
+    //基于用户名执行日志信息查询
+    function doQueryObjects() {
+        //为什么要在此位置初始化pageCurrent的值为1？
+        //数据查询时页码的初始化位置也应该是第一页
+        $("#pageId").data("pageCurrent", 1);//设置当前页码值
+        //为什么要调用doGetObjects函数
+        //重用js代码，简化js代码编写
+        doGetObjects();
+    }
 
-	//开启ajax异步任务，按条件加载用户行为日志信息
-	function doGetObjects() {
-		//debugger
-		//1.定义请求参数
-		//? 请问data函数的含义是什么？(从指定元素上获取绑定的数据)
-		//此数据会在何时进行绑定？(setPagination,doQueryObjects)
-		var pageCurrent = $("#pageId").data("pageCurrent");
-		//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
-		//pageCurrent参数在没有赋值的情况下，默认初始值应该为1
-		if (!pageCurrent) pageCurrent = 1;
-		//1.1定义请求参数的方式1
-		//var params="pageCurremt=1;
-		//1.2定义请求参数的方式2：
-		var params = {"pageCurrent": 1};
-		//2.定义请求url
-		var url = "log/doFindPageObjects";
-		var params = {"pageCurrent": pageCurrent};//pageCurrent=2
-		//获取用户输入的用户名
-		var username = $("#searchNameId").val();
-		//如下语句的含义是什么？动态在json格式js对象中添加key/value
-		if (username) params.username = username;//这里的key需要与服务端接收参数时使用的名字相同。
-		//2.发起异步请求,处理响应结果
-		// $.getJSON(url,params,function (result) {
-		// 	doHandleQueryResponseResult(result);
-		// });//特殊的ajax函数
-		//如上的简写形式
-		$.getJSON(url, params, doHandleQueryResponseResult);
-		//getJSON函数内部的实现是如下形式
-		/*$.ajax({
+    //开启ajax异步任务，按条件加载用户行为日志信息
+    function doGetObjects() {
+        //debugger
+        //1.定义请求参数
+        //? 请问data函数的含义是什么？(从指定元素上获取绑定的数据)
+        //此数据会在何时进行绑定？(setPagination,doQueryObjects)
+        var pageCurrent = $("#pageId").data("pageCurrent");
+        //为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
+        //pageCurrent参数在没有赋值的情况下，默认初始值应该为1
+        if (!pageCurrent) pageCurrent = 1;
+        //1.1定义请求参数的方式1
+        //var params="pageCurremt=1;
+        //1.2定义请求参数的方式2：
+        var params = {"pageCurrent": 1};
+        //2.定义请求url
+        var url = "log/doFindPageObjects";
+        var params = {"pageCurrent": pageCurrent};//pageCurrent=2
+        //获取用户输入的用户名
+        var username = $("#searchNameId").val();
+        //如下语句的含义是什么？动态在json格式js对象中添加key/value
+        if (username) params.username = username;//这里的key需要与服务端接收参数时使用的名字相同。
+        //2.发起异步请求,处理响应结果
+        // $.getJSON(url,params,function (result) {
+        // 	doHandleQueryResponseResult(result);
+        // });//特殊的ajax函数
+        //如上的简写形式
+        $.getJSON(url, params, doHandleQueryResponseResult);
+        //getJSON函数内部的实现是如下形式
+        /*$.ajax({
             url:url,
             dataType:"json",
             data:params,
             success:doHandleQueryResponseResult
          });*/
 
-		//$.ajax底层实现
-		/*
+        //$.ajax底层实现
+        /*
         var xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function(){
            if(xhr.readyState==4&&xhr.status==200){
@@ -209,43 +214,52 @@
         xhr.open("Get","log/doFindPageObjects?pageCurrent=1",true);
         xhr.send(null);
         */
-	}
+    }
 
-	function doHandleQueryResponseResult(result) {//result为json格式的js对象
-		/*		console.log("result",result);
+    function doHandleQueryError(msg) {
+        $("#tbodyId").html(`<tr><td colspan=7>${"记录不存在"}</td></td></tr>`)
+        $("#checkAll").prop("checked", false);
+
+    }
+
+    function doHandleQueryResponseResult(result) {//result为json格式的js对象
+        /*		console.log("result",result);
                 console.log("result.state",result.state);
                 console.log("result.data",result.data);//对应服务端的pageObject
                 console.log("result.data.records",result.data.records);//对应服务端查询到的用户日志*/
-		if (result.state == 1) {//state==1表示正常的响应数据
-			//将result.data.records呈现在log_list.html的tbody位置
-			doSetTableBodyRows(result.data.records);
-			//将result.data中的分页信息呈现在page.html指定位置
-			doSetPagination(result.data);//result.data对应的是服务端业务层PageObject
-		} else {
-			alert(result.message);
-		}
-	}
+        if (result.state == 1) {//state==1表示正常的响应数据
+            //将result.data.records呈现在log_list.html的tbody位置
+            doSetTableBodyRows(result.data.records);
+            //将result.data中的分页信息呈现在page.html指定位置
+            doSetPagination(result.data);//result.data对应的是服务端业务层PageObject
+            //更新thead中checkbox的值(目的是在处理分页查询事件时假如是全选状态在点击分页信息时刷新状态)
+            $("#checkAll").prop("checked", false);
+        } else {
+            //alert(result.message);
+            doHandleQueryError(result.message);
+        }
+    }
 
-	//更新table对象的tbody位置的内容
-	function doSetTableBodyRows(records) {
-		//1.获得tBody对象并清空原有内容
-		var tBody = $('#tbodyId');
-		tBody.empty();
-		//2.迭代records记录并将其追加到tbody中
-		//方法1
-		/*
+    //更新table对象的tbody位置的内容
+    function doSetTableBodyRows(records) {
+        //1.获得tBody对象并清空原有内容
+        var tBody = $('#tbodyId');
+        tBody.empty();
+        //2.迭代records记录并将其追加到tbody中
+        //方法1
+        /*
         for(var i=0;i<records.length;i++){
             tBody.append(doCreateRows(records[i]));
         }
         */
-		//方法2：
-		records.forEach((item) => tBody.append(doCreateRows(item)));
-	}
+        //方法2：
+        records.forEach((item) => tBody.append(doCreateRows(item)));
+    }
 
-	//基于记录创建行（tr）对象
-	function doCreateRows(item) {
-		//debugger
-		return `<tr>
+    //基于记录创建行（tr）对象
+    function doCreateRows(item) {
+        //debugger
+        return `<tr>
 				<td><input type="checkbox" value=${item.id}></td>
 				<td>${item.username}</td>
 				<td>${item.operation}</td>
@@ -254,8 +268,9 @@
 				<td>${item.ip}</td>
 				<td>${item.time}</td>
 				</tr>`;
-	}
+    }
 </script>
+</html>
 
 
 

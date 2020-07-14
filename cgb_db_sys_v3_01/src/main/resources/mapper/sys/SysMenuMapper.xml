@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.pj.sys.dao.SysMenuDao">
+
+    <delete id="deleteObject">
+        delete from sys_menus where id=#{id}
+    </delete>
+
+    <select id="getChildCount" parameterType="int" resultType="int">
+        select count(*) from sys_menus where parentId=#{id}
+    </select>
+
+    <!--查询所有菜单以及菜单对应的上级菜单名称-->
+    <select id="findObjects" resultType="map">
+/*  方案1：嵌套查询
+select c.*,(select p.name from sys_menus p where  c.parentId=p.id) parentName
+        from sys_menus c*/
+        /*方案2：多表查询关联中自关联*/
+        select c.*,p.name parentName
+        from sys_menus c left join sys_menus p  on c.parentId=p.id
+    </select>
+</mapper>
