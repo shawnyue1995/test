@@ -112,7 +112,15 @@
         $(".input-group-btn")
             .on("click", ".btn-delete", doDeleteObject)
             .on("click", ".btn-add,.btn-update", doLoadEditUI);
+        $(".box-footer")
+            .on("click", ".btn-chancel", "doCancel")
+            .on("click", "btn-save", "doSaveOrUpdate")
     })
+
+    function doCancel() {
+        var url = "menu/menu_list";
+        $("#mainContentId").load(url);
+    }
 
     function doLoadEditUI() {
         var title;
