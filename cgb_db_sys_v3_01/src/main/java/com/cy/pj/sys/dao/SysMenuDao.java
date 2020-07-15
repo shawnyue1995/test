@@ -1,6 +1,6 @@
 package com.cy.pj.sys.dao;
 
-import com.cy.pj.common.vo.Node;
+import com.cy.pj.common.pojo.Node;
 import com.cy.pj.sys.pojo.SysMenu;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,8 +16,20 @@ public interface SysMenuDao {
 
     List<Node> findZtreeMenuNodes();
 
+    /**
+     * 删除菜单自身信息
+     *
+     * @param id
+     * @return
+     */
     int deleteObject(Integer id);
 
+    /**
+     * 基于菜单id获取菜单对应的子菜单
+     *
+     * @param id
+     * @return
+     */
     int getChildCount(Integer id);
 
     /**

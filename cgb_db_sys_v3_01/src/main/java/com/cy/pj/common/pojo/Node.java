@@ -1,4 +1,4 @@
-package com.cy.pj.common.vo;
+package com.cy.pj.common.pojo;
 
 import lombok.Data;
 

@@ -40,7 +40,7 @@
 <script src="bower_components/treegrid/tree.table.js" type="text/javascript"></script>
 <script type="text/javascript">
     /**
-     * 初始化表格的列
+     * 初始化表格的列标题，列内容
      */
     var columns = [
         {
@@ -112,17 +112,11 @@
         $(".input-group-btn")
             .on("click", ".btn-delete", doDeleteObject)
             .on("click", ".btn-add,.btn-update", doLoadEditUI);
-        $(".box-footer")
-            .on("click", ".btn-chancel", "doCancel")
-            .on("click", "btn-save", "doSaveOrUpdate")
     })
 
-    function doCancel() {
-        var url = "menu/menu_list";
-        $("#mainContentId").load(url);
-    }
-
+    //加载编辑页面(添加页面和修改页面共用一个页面)
     function doLoadEditUI() {
+        debugger
         var title;
         //基于点击对象的class属性值,修改标题
         if ($(this).hasClass("btn-add")) {
@@ -134,6 +128,7 @@
                 alert("请先选择");
                 return;
             }
+            //将tr上获得的数据绑定在一个编辑页面看得到的地方法
             $("#mainContentId")
                 .data("rowData", item);
         }
@@ -192,7 +187,7 @@
     }
 
     function doGetObjects() {
-        //移除mainContentId位置的数据
+        //移除mainContentId位置的数据,此数据是通过data函数绑定的数据
         $("#mainContentId").removeData();
         var treeTable = new TreeTable(
             "menuTable",//tableId
@@ -201,6 +196,5 @@
         //treeTable.setExpandColumn(2);
         //做表格初始化
         treeTable.init();	//发起ajax请求(借助ajax函数)
-
     }
 </script>
