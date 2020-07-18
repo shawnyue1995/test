@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.pj.sys.dao.SysRoleDao">
+    <!--通过sql标签提取sql中的共性-->
+    <sql id="queryWhereId">
+        <where>
+            <if test="name!=null and name!=''">
+                name like concat("%",#{name},"%")
+            </if>
+        </where>
+    </sql>
+
+    <select id="getRowCount" resultType="int">
+        select count(*)
+        from sys_roles
+        <include refid="queryWhereId"/>
+    </select>
+    <!--查询当前页记录总数-->
+    <select id="findPageObjects" resultType="com.cy.pj.sys.pojo.SysRole">
+        select * from sys_roles
+        <include refid="queryWhereId"/>
+        order by createdTime desc
+        limit #{startIndex},#{pageSize}
+    </select>
+    <delete id="deleteObject">
+        delete from sys_roles
+        where id=#{id}
+    </delete>
+    <!--useGeneratedKeys 表示试用insert操作的自增主键值
+        keyProperty表示将自增主键值存储到参数对象SysRole的对应属性上
+    -->
+    <insert id="insertObject" parameterType="com.cy.pj.sys.pojo.SysRole"
+            useGeneratedKeys="true"
+            keyProperty="id">
+        insert into sys_roles
+        (id,name,note,createdTime,modifiedTime,
+         createdUser,modifiedUser)
+         values
+         (null,#{name},#{note},now(),now(),
+         #{createdUser},#{modifiedUser})
+    </insert>
+
+    <!--resultType 用于查询过程中的简单数据映射-->
+    <!--resultMap 是mybatis中用于实现高级映射的一个非常重要的元素，
+    主要应用于自定义映射规则的设计，例如字段的自定义映射，表嵌套查询映射，表关联映射-->
+    <resultMap type="com.cy.pj.sys.pojo.SysRoleMenu" id="sysRoleMenu">
+        <!-- id元素用于实现主键字段映射：尤其是当在再次基于主键执行其他查询，建议将id主键值进行手动映射 -->
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="note" column="note"/>
+        <!-- collection一般应用于one2many查询 -->
+        <collection property="menuIds"
+                    select="com.cy.pj.sys.dao.SysRoleMenuDao.findMenuIdsByRoleId"
+                    column="id">
+        </collection>
+    </resultMap>
+    <select id="findObjectById" resultMap="sysRoleMenu">
+        select id,name,note from sys_roles where id=#{id}
+    </select>
+    <update id="updateObject" parameterType="com.cy.pj.sys.pojo.SysRole">
+        update sys_roles
+        set name=#{name},
+           note=#{note},
+           modifiedUser=#{modifiedUser},
+           modifiedTime=now()
+        where id=#{id}
+    </update>
+</mapper>

@@ -91,18 +91,31 @@
     function doDeleteObject() {
         //1.params
         var id = $(this).parents("tr").data("id");
-        var params = {"id": id};
+        console.log("id", id)
+        var params = {"id": id};//"id="+id
         //2.url
         var url = "role/doDeleteObject"
         //3.ajax request
-        $.post(url, params, function (result) {
-            if (result.state == 1) {
-                alert(result.message);
-                doGetObjects();
-            } else {
-                alert(result.message);
+        /* $.post(url,params,function(result){
+             if(result.state==1){
+                 alert(result.message);
+                 doGetObjects();
+             }else{
+                 alert(result.message);
+             }
+         }) */
+
+        $.ajax({
+            "type": "delete", "url": url, "data": params, "success": function (result) {
+                if (result.state == 1) {
+                    alert(result.message);
+                    doGetObjects();
+                } else {
+                    alert(result.message);
+                }
             }
         })
+
 
     }
 
@@ -112,7 +125,6 @@
     }
 
     function doGetObjects() {
-        debugger
         //1.params
         //获取在Page.html中绑定的当前页码值
         var pageCurrent = $("#pageId").data("pageCurrent");
@@ -161,6 +173,7 @@
 
     function doSetTableBodyRows(records) {
 
+        debugger
         //获取tbody对象,并清空
         var tBody = $("#tbodyId");
         tBody.empty();

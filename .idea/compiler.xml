@@ -8,15 +8,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cgb-springboot-01" />
-        <module name="cgb-activity-01" />
-        <module name="cgb-springboot-03" />
-        <module name="cgb-springboot-05" />
-        <module name="cgb-springboot-07" />
-        <module name="cgb-springboot-06" />
+        <module name="cgb_db_sys_v3_test" />
         <module name="cgb_db_sys_v3_01" />
-        <module name="cgb-springboot-04" />
         <module name="cgb-ajax-01" />
         <module name="cgb-springboot-02" />
+        <module name="cgb-springboot-07" />
+        <module name="cgb-springboot-06" />
+        <module name="cgb-springboot-05" />
+        <module name="cgb-springboot-04" />
+        <module name="cgb-springboot-03" />
+        <module name="cgb-activity-01" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -37,6 +38,7 @@
       <module name="cgb-springboot-07" target="1.8" />
       <module name="cgb-springboot-08" target="1.8" />
       <module name="cgb_db_sys_v3_01" target="1.8" />
+      <module name="cgb_db_sys_v3_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -56,6 +58,7 @@
       <module name="cgb-springboot-06" options="-parameters" />
       <module name="cgb-springboot-08" options="-parameters" />
       <module name="cgb_db_sys_v3_01" options="-parameters" />
+      <module name="cgb_db_sys_v3_test" options="-parameters" />
     </option>
   </component>
 </project>

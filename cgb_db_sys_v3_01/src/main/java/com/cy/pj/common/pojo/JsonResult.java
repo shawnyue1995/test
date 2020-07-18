@@ -33,6 +33,7 @@ public class JsonResult implements Serializable {
         this.message = message;
     }
 
+
     public JsonResult(Object data) {
         this.data = data;
     }
