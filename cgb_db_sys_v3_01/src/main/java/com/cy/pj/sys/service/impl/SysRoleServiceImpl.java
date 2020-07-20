@@ -1,5 +1,6 @@
 package com.cy.pj.sys.service.impl;
 
+import com.cy.pj.common.pojo.CheckBox;
 import com.cy.pj.common.pojo.PageObject;
 import com.cy.pj.common.web.AssertUtil;
 import com.cy.pj.sys.dao.SysRoleDao;
@@ -85,5 +86,9 @@ public class SysRoleServiceImpl implements SysRoleService {
         return rows;
     }
 
+    @Override
+    public List<CheckBox> findObjects() {
+        return sysRoleDao.findObjects();
+    }
 }
 

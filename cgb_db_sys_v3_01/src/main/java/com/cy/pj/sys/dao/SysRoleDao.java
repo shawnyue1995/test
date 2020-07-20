@@ -1,5 +1,6 @@
 package com.cy.pj.sys.dao;
 
+import com.cy.pj.common.pojo.CheckBox;
 import com.cy.pj.sys.pojo.SysRole;
 import com.cy.pj.sys.pojo.SysRoleMenu;
 import org.apache.ibatis.annotations.Mapper;
@@ -46,4 +47,11 @@ public interface SysRoleDao {
     List<SysRole> findPageObjects(@Param("name") String name,
                                   @Param("startIndex") Integer startIndex,
                                   @Param("pageSize") Integer pageSize);
+
+    /**
+     * 查询角色id，name
+     *
+     * @return
+     */
+    List<CheckBox> findObjects();
 }

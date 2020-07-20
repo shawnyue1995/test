@@ -57,14 +57,30 @@
         </collection>
     </resultMap>
     <select id="findObjectById" resultMap="sysRoleMenu">
-        select id,name,note from sys_roles where id=#{id}
+        select id, name, note
+        from sys_roles
+        where id = #{id}
     </select>
     <update id="updateObject" parameterType="com.cy.pj.sys.pojo.SysRole">
         update sys_roles
         set name=#{name},
-           note=#{note},
-           modifiedUser=#{modifiedUser},
-           modifiedTime=now()
-        where id=#{id}
+            note=#{note},
+            modifiedUser=#{modifiedUser},
+            modifiedTime=now()
+        where id = #{id}
     </update>
+
+    <select id="findObjects" resultType="com.cy.pj.common.pojo.CheckBox">
+        select id, name
+        from sys_roles;
+    </select>
+
+    <insert id="insertObjects">
+        insert into sys_user_roles
+        (user_id, role_id)
+        values
+        <foreach collection="roleIds" separator="," item="roleId">
+            (#{user_id},#{role_id})
+        </foreach>
+    </insert>
 </mapper>
