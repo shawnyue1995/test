@@ -3,12 +3,20 @@ package com.cy.pj.sys.dao;
 import com.cy.pj.sys.pojo.SysUser;
 import com.cy.pj.sys.pojo.SysUserDept;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
 @Mapper
 public interface SysUserDao {
+    /**
+     * 基于用户id修改用户密码信息
+     */
+    int updatePassword(@Param("password") String password,
+                       @Param("salt") String salt,
+                       @Param("id") Integer id);
+
     /**
      * 基于用户id查询用户以及用户对应的部门信息
      *

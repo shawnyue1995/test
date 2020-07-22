@@ -1,13 +1,15 @@
 package com.cy.pj.sys.service.impl;
 
+import com.cy.pj.common.annotation.RequiredLog;
 import com.cy.pj.common.pojo.PageObject;
-import com.cy.pj.common.web.AssertUtil;
+import com.cy.pj.common.util.AssertUtil;
 import com.cy.pj.sys.dao.SysUserDao;
 import com.cy.pj.sys.dao.SysUserRoleDao;
 import com.cy.pj.sys.pojo.SysUser;
 import com.cy.pj.sys.pojo.SysUserDept;
 import com.cy.pj.sys.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,27 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserDao sysUserDao;
     @Autowired
     private SysUserRoleDao sysUserRoleDao;
+
+    @Override
+    public int updatePassword(String password, String newPassword, String cfgPassword) {
+        //1.判断输入的密码与确认密码是否相同
+        AssertUtil.isArgumentValid(StringUtils.isEmpty(newPassword), "密码不能为空");
+        AssertUtil.isArgumentValid(StringUtils.isEmpty(cfgPassword), "确认密码不能为空");
+        AssertUtil.isArgumentValid(!newPassword.equals(cfgPassword), "两次输入的密码不同");
+        //2.判断原密码是否正确
+        AssertUtil.isArgumentValid(StringUtils.isEmpty(password), "原密码不能为空");
+        //获取登录用户
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        SimpleHash sh = new SimpleHash("HD5", password, user.getSalt(), 1);
+        AssertUtil.isArgumentValid(!user.getPassword().equals(sh.toHex()), "原密码不正确");
+        //3.对新密码进行加密
+        String salt = UUID.randomUUID().toString();
+        sh = new SimpleHash("MDH5", newPassword, salt, 1);
+        //4.将新密码加密以后的结果更新到数据库
+        int rows = sysUserDao.updatePassword(sh.toHex(), salt, user.getId());
+        AssertUtil.isResultValid(rows == 0, "更新失败");
+        return rows;
+    }
 
     @Override
     public Map<String, Object> findObjectById(Integer id) {
@@ -94,6 +117,7 @@ public class SysUserServiceImpl implements SysUserService {
         return rows;
     }
 
+    @RequiredLog("用户禁用启用")
     @Override
     public int validById(Integer id, Integer valid) {
         //1.参数校验
@@ -106,7 +130,7 @@ public class SysUserServiceImpl implements SysUserService {
         return 0;
     }
 
-
+    @RequiredLog("用户分页查询")
     @Override
     public PageObject<SysUserDept> findPageObjects(String username,
                                                    Integer pageCurrent) {

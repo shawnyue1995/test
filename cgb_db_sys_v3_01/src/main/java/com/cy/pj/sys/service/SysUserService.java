@@ -7,6 +7,15 @@ import com.cy.pj.sys.pojo.SysUserDept;
 import java.util.Map;
 
 public interface SysUserService {
+    /**
+     * 基于用户id修改密码
+     *
+     * @param password
+     * @param newPassword
+     * @param cfgPassword
+     * @return
+     */
+    int updatePassword(String password, String newPassword, String cfgPassword);
 
     Map<String, Object> findObjectById(Integer id);
 

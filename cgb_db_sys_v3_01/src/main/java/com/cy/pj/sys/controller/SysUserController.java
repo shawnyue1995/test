@@ -44,4 +44,12 @@ public class SysUserController {
         sysUserService.updateObject(entity, roleIds);
         return new JsonResult("update ok");
     }
+
+    @RequestMapping("doUpdatePassword")
+    public JsonResult doUpdatePassword(String pwd,
+                                       String newPwd,
+                                       String cfgPwd) {
+        sysUserService.updatePassword(pwd, newPwd, cfgPwd);
+        return new JsonResult("update ok");
+    }
 }

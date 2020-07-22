@@ -1,8 +1,10 @@
 package com.cy.pj.sys.service.impl;
 
+import com.cy.pj.common.annotation.ClearCache;
+import com.cy.pj.common.annotation.RequiredCache;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.common.pojo.Node;
-import com.cy.pj.common.web.AssertUtil;
+import com.cy.pj.common.util.AssertUtil;
 import com.cy.pj.sys.dao.SysDeptDao;
 import com.cy.pj.sys.pojo.SysDept;
 import com.cy.pj.sys.service.SysDeptService;
@@ -18,6 +20,7 @@ public class SysDeptServiceImpl implements SysDeptService {
     @Autowired
     private SysDeptDao sysDeptDao;
 
+    @RequiredCache//使用自己写的注解描述方法
     @Override
     public List<Map<String, Object>> findObjects() {
         List<Map<String, Object>> list = sysDeptDao.findObjects();
@@ -32,6 +35,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         return list;
     }
 
+    @ClearCache
     @Override
     public int saveObject(SysDept entity) {
         //1.合法验证
@@ -44,6 +48,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         return rows;
     }
 
+    @ClearCache
     @Override
     public int updateObject(SysDept entity) {
         //1.合法验证
@@ -60,6 +65,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         return rows;
     }
 
+    @ClearCache
     @Override
     public int deleteObject(Integer id) {
         //1.合法性验证

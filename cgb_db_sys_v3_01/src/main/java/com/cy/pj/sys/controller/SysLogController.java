@@ -36,4 +36,5 @@ public class SysLogController {
         //2）DispatcherServlet对象会将JsonResult转换为json格式的字符串然后相应到客户端
         //3）转换过程是DispatcherServlet对象调用了jackson api来实现的
     }
+
 }
