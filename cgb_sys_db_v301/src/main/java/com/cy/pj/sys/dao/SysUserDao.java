@@ -71,4 +71,6 @@ public interface SysUserDao {
     List<SysUserDept> findPageObjects(String username,
                                       Integer startIndex,
                                       Integer pageSize);
+
+    SysUser findUserByUserName(String username);
 }

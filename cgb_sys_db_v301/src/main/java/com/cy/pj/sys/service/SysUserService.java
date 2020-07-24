@@ -7,6 +7,8 @@ import com.cy.pj.sys.pojo.SysUserDept;
 import java.util.Map;
 
 public interface SysUserService {
+
+
     /**
      * 基于用户id修改密码
      *

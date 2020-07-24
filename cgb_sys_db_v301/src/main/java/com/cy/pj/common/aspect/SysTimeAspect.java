@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class SysTimeAspect {
-    @Pointcut("bean(sysUserServiceImpl)")
+    @Pointcut("bean(sysRoleServiceImpl)")
     public void doTimeAspect() {
     }
 
@@ -39,10 +39,10 @@ public class SysTimeAspect {
     @Around("doTimeAspect()")
     public Object doAround(ProceedingJoinPoint jp)
             throws Throwable {
-        System.out.println("SysTimeAspect.@Around.before");
+        System.out.println("@Around.before");
         try {
             Object result = jp.proceed();//执行本类@Before（假如有）,后续其他切面方法（假如有），最后目标方法
-            System.out.println("SysTimeAspect.@Around.after");
+            System.out.println("@Around.after");
             return result;
         } catch (Throwable e) {
             System.out.println("@Around.exception");
